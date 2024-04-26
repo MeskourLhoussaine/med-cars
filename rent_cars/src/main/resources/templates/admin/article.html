@@ -1,0 +1,98 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/template}">
+
+<head>
+    <title>Dashboard Blog</title>
+</head>
+
+<body layout:fragment="content">
+
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <!-- Page Title Start -->
+            <div class="col-lg-12">
+                <div class="section-title  text-center">
+                    <h2>Dashboard Bolg</h2>
+                    <span class="title-line"><i class="fa fa-car"></i></span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <!-- Page Title End -->
+        </div>
+    </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header fw-bold">Articles</div>
+                    <div class="card-body">
+                        <table id="table"
+                               class="table table-bordered table-hover table-responsive-md text-center w-100">
+                            <thead class="bg-light align-middle">
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Content</th>
+                            <th class="text-center">Date</th>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="article : ${articles}">
+                                <td th:text="${article.getTitle()}"></td>
+                                <td th:text="${#strings.abbreviate(article.getContent(), 25)}"></td>
+                                <td th:text="${#dates.format(article.getAddDate(), 'MMMM dd, yyyy')}"></td>
+                            </tr>
+                            </tbody>
+
+                            <tfoot class="bg-light">
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Content</th>
+                            <th class="text-center">Date</th>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-header fw-bold">
+                        Add new
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form id="formArticle" th:action="@{/dashboard/articles/save}"
+                                  method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" name="title" class="form-control" placeholder="Title">
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <label>Content</label>
+                                    <textarea class="form-control" name="content"
+                                              style="height: 200px"></textarea>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <label>Image</label>
+                                    <input type="file" class="form-control" name="image" accept="image/*"
+                                           placeholder="Image">
+                                </div>
+
+                                <button class="btn btn-primary mt-3" type="submit" id="btnArticle">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

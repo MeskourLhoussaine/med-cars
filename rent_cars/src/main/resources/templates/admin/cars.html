@@ -1,0 +1,196 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/template}">
+
+<head>
+    <title>Dashboard Cars</title>
+</head>
+
+<body layout:fragment="content">
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <!-- Page Title Start -->
+            <div class="col-lg-12">
+                <div class="section-title  text-center">
+                    <h2>Dashboard Cars</h2>
+                    <span class="title-line"><i class="fa fa-car"></i></span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <!-- Page Title End -->
+        </div>
+    </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header fw-bold">Cars</div>
+                    <div class="card-body">
+                        <table id="table"
+                               class="table table-bordered table-hover table-responsive-md text-center w-100">
+                            <thead class="bg-light align-middle">
+                            <th class="text-center">Matricule</th>
+                            <th class="text-center">Model</th>
+                            <th class="text-center">Marque</th>
+                            <th class="text-center">Color</th>
+                            <th class="text-center">Vetisse</th>
+                            <th class="text-center">Place</th>
+                            <th class="text-center">Port</th>
+                            <th class="text-center">Carburant</th>
+                            <th class="text-center">Climatiseur</th>
+                            <th class="text-center">Prix</th>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="vehicule : ${vehicules}">
+                                <td th:text="${vehicule.getSerialNumber()}"></td>
+                                <td th:text="${vehicule.getModel()}"></td>
+                                <td th:text="${vehicule.getMarque()}"></td>
+                                <td th:text="${vehicule.getColor()}"></td>
+                                <td th:text="${vehicule.getBoiteVetisse()}"></td>
+                                <td th:text="${vehicule.getPlaceNumber()}"></td>
+                                <td th:text="${vehicule.getNombrePort()}"></td>
+                                <td th:text="${vehicule.getCarburant()}"></td>
+                                <td th:text="${vehicule.getClimatiseur()}"></td>
+                                <td th:text="${vehicule.getPriceDay()}"></td>
+                            </tr>
+                            </tbody>
+
+                            <tfoot class="bg-light">
+                            <th class="text-center">Matricule</th>
+                            <th class="text-center">Model</th>
+                            <th class="text-center">Marque</th>
+                            <th class="text-center">Color</th>
+                            <th class="text-center">Vetisse</th>
+                            <th class="text-center">Place</th>
+                            <th class="text-center">Port</th>
+                            <th class="text-center">Carburant</th>
+                            <th class="text-center">Climatiseur</th>
+                            <th class="text-center">Prix</th>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow">
+                    <div class="card-header fw-bold">
+                        Add new
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form id="formArticle" th:action="@{/dashboard/cars/save}"
+                                  method="POST" enctype="multipart/form-data">
+
+                                <div class="col-lg-12">
+                                    <div class="form-group mt-3">
+                                        <label>Matricule</label>
+                                        <input type="text" name="matricule" class="form-control" placeholder="Matricule">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Marque</label>
+                                            <input type="text" name="marque" class="form-control" placeholder="Marque">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Model</label>
+                                            <input type="text" name="model" class="form-control" placeholder="Model">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Color</label>
+                                            <input type="text" name="color" class="form-control" placeholder="Color">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Vetisse</label>
+                                            <select name="vetisse" class="form-select">
+                                                <option value="M">Manual</option>
+                                                <option value="A">Auto</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Place</label>
+                                            <input type="text" name="place" class="form-control" placeholder="Place">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Port</label>
+                                            <input type="text" name="port" class="form-control" placeholder="Port">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Carburent</label>
+                                            <select name="carburent" class="form-select">
+                                                <option value="D">Diesel</option>
+                                                <option value="E">Essence</option>
+                                                <option value="H">Hybrid</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-3">
+                                            <label>Climatiseur</label>
+                                            <select name="climatiseur" class="form-select">
+                                                <option value="true">OUI</option>
+                                                <option value="false">NON</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group mt-3">
+                                        <label>Prix</label>
+                                        <input type="text" name="prix" class="form-control" placeholder="Prix">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mt-3">
+                                        <label>Image</label>
+                                        <input type="file" class="form-control" name="image" accept="image/*"
+                                               placeholder="Image">
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary mt-3" type="submit" id="btnArticle">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

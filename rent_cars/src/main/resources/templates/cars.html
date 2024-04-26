@@ -1,0 +1,94 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/template}">
+
+<head>
+    <title>Cars</title>
+</head>
+
+<body layout:fragment="content">
+
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <!-- Page Title Start -->
+            <div class="col-lg-12">
+                <div class="section-title  text-center">
+                    <h2>Our Cars</h2>
+                    <span class="title-line"><i class="fa fa-car"></i></span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+            </div>
+            <!-- Page Title End -->
+        </div>
+    </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<!--== Car List Area Start ==-->
+<section id="car-list-area" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Car List Content Start -->
+            <div class="col-lg-12">
+                <div class="car-list-content">
+                    <div class="row">
+
+                        <div class="col-12" th:if="${#lists.isEmpty(cars)}">
+                            <h1 class="text-center text-warning mb-3">Ops....!!</h1>
+                            <h3 class="text-center">No cars available</h3>
+                        </div>
+
+                        <!-- Single Car Start -->
+                        <div class="col-lg-6 col-md-6" th:each="car : ${cars}">
+                            <div class="single-car-wrap">
+                                <div class="car-list-thumb" th:style="'background-image: url(' + ${car.getImage()} + ')'"></div>
+                                <div class="car-list-info without-bar">
+                                    <h2><a href="#" th:text="${car.marque + ' ('+ car.getModel() + ')'}"></a></h2>
+                                    <h5><span th:text="${car.getPriceDay()}"></span>MAD Rent /per a day</h5>
+                                    <ul class="car-info-list">
+                                        <li th:switch="${car.getClimatiseur()}">
+                                            <span th:case="true" th:text="AC"></span>
+                                            <span th:case="false" th:text="DC"></span>
+                                        </li>
+
+                                        <li th:switch="${car.getCarburant()}">
+                                            <span th:case="E" th:text="Essence"></span>
+                                            <span th:case="D" th:text="Diesel"></span>
+                                            <span th:case="H" th:text="Hybrid"></span>
+                                        </li>
+
+                                        <li th:switch="${car.getBoiteVetisse()}">
+                                            <span th:case="M" th:text="Manual"></span>
+                                            <span th:case="A" th:text="Auto"></span>
+                                        </li>
+                                    </ul>
+                                    <a th:href="@{/reservation/{id} (id = ${car.getId()})}" class="rent-btn">Book It</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Car End -->
+                    </div>
+                </div>
+
+                <!-- Page Pagination Start -->
+                <div class="page-pagi" th:if="${not #lists.isEmpty(cars)}">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Page Pagination End -->
+            </div>
+            <!-- Car List Content End -->
+        </div>
+    </div>
+</section>
+<!--== Car List Area End ==-->
+</body>
+
+</html>

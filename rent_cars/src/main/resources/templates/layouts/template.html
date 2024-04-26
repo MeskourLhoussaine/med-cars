@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon"/>
+    <!--=== Bootstrap CSS ===-->
+    <link th:href="@{/static/assets/css/bootstrap.min.css}" rel="stylesheet">
+    <!--=== Vegas Min CSS ===-->
+    <link th:href="@{/static/assets/css/plugins/vegas.min.css}" rel="stylesheet">
+    <!--=== Slicknav CSS ===-->
+    <link th:href="@{/static/assets/css/plugins/slicknav.min.css}" rel="stylesheet">
+    <!--=== Magnific Popup CSS ===-->
+    <link th:href="@{/static/assets/css/plugins/magnific-popup.css}" rel="stylesheet">
+    <!--=== Owl Carousel CSS ===-->
+    <link th:href="@{/static/assets/css/plugins/owl.carousel.min.css}" rel="stylesheet">
+    <!--=== Gijgo CSS ===-->
+    <link th:href="@{/static/assets/css/plugins/gijgo.css}" rel="stylesheet">
+    <!--=== FontAwesome CSS ===-->
+    <link th:href="@{/static/assets/css/font-awesome.css}" rel="stylesheet">
+    <!--=== Theme Reset CSS ===-->
+    <link th:href="@{/static/assets/css/reset.css}" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link th:href="@{/static/style.css}" rel="stylesheet">
+    <!--=== Responsive CSS ===-->
+    <link th:href="@{/assets/css/responsive.css}" rel="stylesheet">
+    <!--=== DataTables CSS ===-->
+    <link th:href="@{/static/assets/css/dataTables.bootstrap5.min.css}" rel="stylesheet">
+    <!--=== Main CSS ===-->
+    <link th:href="@{/static/main.css}" rel="stylesheet">
+    <title></title>
+</head>
+
+<body class="loader-active">
+
+<!--== Preloader Area Start ==-->
+<div class="preloader">
+    <div class="preloader-spinner">
+        <div class="loader-content">
+            <img th:src="@{/static/assets/img/preloader.gif}" alt="JSOFT">
+        </div>
+    </div>
+</div>
+<!--== Preloader Area End ==-->
+
+<!--== Header Area Start ==-->
+<header th:replace="~{layouts/header :: header}"></header>
+<!--== Header Area End ==-->
+
+<!--== Content Area Start ==-->
+<main layout:fragment="content"></main>
+<!--== Content Area End ==-->
+
+<!--== Footer Area Start ==-->
+<footer th:replace="~{layouts/footer :: footer}"></footer>
+<!--== Footer Area End ==-->
+
+
+<!--== Scroll Top Area Start ==-->
+<div class="scroll-top">
+    <img th:src="@{/static/assets/img/scroll-top.png}" alt="JSOFT">
+</div>
+<!--== Scroll Top Area End ==-->
+
+<!--=======================Javascript============================-->
+<!--=== Jquery Min Js ===-->
+<script th:src="@{/static/assets/js/jquery-3.2.1.min.js}"></script>
+<!--=== Jquery Migrate Min Js ===-->
+<script th:src="@{/static/assets/js/jquery-migrate.min.js}"></script>
+<!--=== Popper Min Js ===-->
+<script th:src="@{/static/assets/js/popper.min.js}"></script>
+<!--=== Bootstrap Min Js ===-->
+<script th:src="@{/static/assets/js/bootstrap.min.js}"></script>
+<!--=== Gijgo Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/gijgo.js}"></script>
+<!--=== Vegas Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/vegas.min.js}"></script>
+<!--=== Isotope Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/isotope.min.js}"></script>
+<!--=== Owl Caousel Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/owl.carousel.min.js}"></script>
+<!--=== Waypoint Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/waypoints.min.js}"></script>
+<!--=== CounTotop Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/counterup.min.js}"></script>
+<!--=== YtPlayer Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/mb.YTPlayer.js}"></script>
+<!--=== Magnific Popup Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/magnific-popup.min.js}"></script>
+<!--=== Slicknav Min Js ===-->
+<script th:src="@{/static/assets/js/plugins/slicknav.min.js}"></script>
+<!--=== DataTables Min Js ===-->
+<script th:src="@{/static/assets/js/datatables.min.js}"></script>
+<!--=== Mian Js ===-->
+<script th:src="@{/static/assets/js/main.js}"></script>
+<script>
+    $(document).ready(function () {
+        const table = $('#table').DataTable({
+            "bLengthChange": false,
+            "pageLength": 10,
+            "autoWidth": true,
+            "bInfo": false,
+            "ordering": false,
+            "language": {
+                "search": '',
+            },
+        });
+
+        let dataTableFilter = $('#table_filter');
+        let dataTableFilterLabel = $('#table_filter label');
+        let dataTableFilterLabelInput = $('#table_filter label input');
+
+        dataTableFilter.parent().prev().remove();
+        dataTableFilter.parent().toggleClass('col-md-12');
+
+        dataTableFilterLabel.addClass('w-100');
+
+        dataTableFilterLabelInput.addClass('w-100 mx-0 mb-3 form-control');
+        dataTableFilterLabelInput.attr('placeholder', 'Search...');
+
+        let dataTablePaginate = $('#table_paginate');
+        dataTablePaginate.addClass('mx-0 mt-3 justify-content-center');
+        dataTablePaginate.parent().prev().remove();
+        dataTablePaginate.parent().toggleClass('col-md-7');
+
+        $('.dropdown .dropdown-toggle').click(function(){
+            if($('.dropdown-menu').hasClass('show')){
+                $('.dropdown-menu').removeClass('show show-sta');
+            }else {
+                $('.dropdown-menu').addClass('show show-sta');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
